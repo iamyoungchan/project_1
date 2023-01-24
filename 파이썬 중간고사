@@ -1,0 +1,79 @@
+# 파이썬 중간고사 문제
+
+from operator import index
+from platform import java_ver
+
+
+def student_delete():
+     id = input("Enter ID : ")
+     # students.pop(index #)
+def student_list():
+    print(f"학번    이름    나이")
+    print("-"*20)
+    for rec in students:
+        print(f'{rec["id"]}     {rec["name"]}    {rec["age"]}' )
+   
+def student_add(students):
+    id = input("Enter ID : ")
+    name = input("Enter Name : ")
+    age = int(input("Enter Age : "))
+    aStudent = {"id": id, "name": name, "age": age}
+    
+    cnt = 0
+    index_no = len(students)
+    for rec in students:
+        if rec["name"] > aStudent[name]:
+            index_no = cnt
+            break
+        else:
+            cnt = cnt + 12
+    students.insert(index_no, aStudent)
+    
+def student_search():
+    flag = 0 # not found
+    id = input("Enter ID : ")
+    for rec in students:
+        if rec["id"] == id:
+            print(id, rec["name"], rec["age"])
+            flag = 1
+    if flag == 0:            
+        print("Not found....")
+students = []
+aStudent = {"id": "111", "name": "춘향", "age": 16}
+students.append(aStudent)
+aStudent = {"id": "123", "name": "홍길동", "age": 20}
+students.append(aStudent)
+
+while True:
+    print("="*20)
+    print("학생 정보 시스템")
+    print("="*20)
+    print("1. 학생 리스트")
+    print("2. 학생 정보 추가")
+    print("3. 학생 정보 검색")
+    print("4. 시스템 종료")
+    print("5. 학생 정보 삭제")
+    print("6. 파일로 데이터 저장")
+    sel = input("번호를 입력하세요. : ")
+    if sel =="1":
+        student_list()
+    elif sel == "2":
+        students = student_add(students)
+    elif sel == "3":
+        student_search()    
+    elif sel == "4":    
+        break
+    elif sel == "5":
+        student_delete()
+
+f = open("students.csv", "w", encoding = 'utf-8')
+for rec in students:
+    f.write(rec["id"] + "," + rec["name"] + str(rec["age"]) + "\n")
+    f.close()
+    
+f = open("students.csv", "r", encoding = 'utf-8')
+rec_lines = f.readlines()
+for rec in rec_lines:
+    print(line)
+f.close()
+
